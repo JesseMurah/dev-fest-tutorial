@@ -1,144 +1,266 @@
-
 <!doctype html>
 
 <html>
-<head>
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <meta name="theme-color" content="#4F7DC9">
-  <meta charset="UTF-8">
-  <title>Google AI Roadshow - Genkit Hands-on Workshop</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
-  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
-  <style>
-    .success {
-      color: #1e8e3e;
-    }
-    .error {
-      color: red;
-    }
-  </style>
-</head>
-<body>
-  <google-codelab-analytics gaid="UA-49880327-14" ga4id=""></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
-                  codelab-ga4id=""
-                  id="docs"
-                  title="Google AI Roadshow - Genkit Hands-on Workshop"
-                  environment="web"
-                  feedback-link="https://github.com/unstacked-labs/genkit-rshow-starter/issues">
-    
-      <google-codelab-step label="Overview" duration="0">
-        <p>In this hands-on codelab, you&#39;ll learn how to build AI-powered applications using <strong>Firebase Genkit</strong>. We&#39;ll create a fun &#34;GitHub Roaster&#34; application that uses AI to analyze a developer&#39;s GitHub profile and generate witty commentary about their coding habits.</p>
-<p><em>This workshop is brought to you by </em><a href="https://unstacked.dev" target="_blank"><em>Unstacked Labs</em></a><em> - empowering developers across Africa with cutting-edge technology.</em></p>
-<p><strong>What you&#39;ll learn:</strong></p>
-<ul>
-<li>How to set up and configure Genkit with Google AI</li>
-<li>Creating type-safe data schemas with Zod</li>
-<li>Building AI tools that can fetch external data</li>
-<li>Implementing AI flows that orchestrate multiple operations</li>
-<li>Using Genkit&#39;s streaming capabilities for real-time responses</li>
-</ul>
-<p><strong>What you&#39;ll build:</strong></p>
-<p>A GitHub profile analyzer that:</p>
-<ul>
-<li>Fetches repository data from the GitHub API</li>
-<li>Analyzes commit patterns and project activity</li>
-<li>Generates entertaining roasts using Google&#39;s Gemini AI</li>
-<li>Streams responses in real-time</li>
-</ul>
-<p><strong>Prerequisites:</strong></p>
-<ul>
-<li>Basic knowledge of TypeScript/JavaScript</li>
-<li>Familiarity with REST APIs</li>
-<li>A GitHub account</li>
-<li>A Google account for AI Studio access</li>
-</ul>
+    <head>
+        <meta
+            name="viewport"
+            content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"
+        />
+        <meta name="theme-color" content="#4F7DC9" />
+        <meta charset="UTF-8" />
+        <title>Google DevFest Tamale - Genkit Hands-on Workshop</title>
+        <link
+            rel="stylesheet"
+            href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono"
+        />
+        <link
+            rel="stylesheet"
+            href="//fonts.googleapis.com/icon?family=Material+Icons"
+        />
+        <link
+            rel="stylesheet"
+            href="https://storage.googleapis.com/claat-public/codelab-elements.css"
+        />
+        <style>
+            .success {
+                color: #1e8e3e;
+            }
+            .error {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <google-codelab-analytics
+            gaid="UA-49880327-14"
+            ga4id=""
+        ></google-codelab-analytics>
+        <google-codelab
+            codelab-gaid=""
+            codelab-ga4id=""
+            id="docs"
+            title="Google DevFest Tamale - Genkit Hands-on Workshop"
+            environment="web"
+        >
+            <google-codelab-step label="Overview" duration="0">
+                <p>
+                    Welcome to the Workshop! In this hands-on codelab, we are
+                    moving beyond simple chatbots. You will learn how to build
+                    production-ready AI applications using
+                    <strong>Firebase Genkit</strong>. We will build a "GitHub
+                    Roaster"—an application that doesn't just "chat," but
+                    actively fetches data, analyzes code patterns, and generates
+                    witty, context-aware commentary.
+                </p>
 
+                <p><strong>What you'll learn:</strong></p>
+                <ul>
+                    <li>
+                        Initialize Genkit: Configure the framework with Google
+                        AI (Gemini).
+                    </li>
+                    <li>
+                        Enforce Type Safety: Use Zod schemas to ensure your AI's
+                        inputs and outputs are structured and predictable.
+                    </li>
+                    <li>
+                        Bridge the Gap: Build custom Tools that allow the AI to
+                        fetch real-time data from the GitHub API.
+                    </li>
+                    <li>
+                        Orchestrate Flows: Chain multiple operations (fetching →
+                        analyzing → generating) into a cohesive logic flow.
+                    </li>
+                    <li>
+                        Stream Results: Implement real-time text streaming for a
+                        snappy user experience.
+                    </li>
+                </ul>
 
-      </google-codelab-step>
-    
-      <google-codelab-step label="Import the Project into Firebase Studio" duration="0">
-        <ol type="1">
-<li>Open <a href="https://firebase.studio/" target="_blank">Firebase Studio</a></li>
-<li>Click <strong>Try Firebase Studio</strong></li>
-<li>Click <strong>Import Repo</strong></li>
-<li>Paste this repo link:<br><code>https://github.com/unstacked-labs/genkit-rshow-starter</code></li>
-<li>Name the workspace <strong>genkit-starter</strong></li>
-<li>Click <strong>Import</strong></li>
-</ol>
-<p><a href="images/firebase_studio.gif" target="_blank"><img alt="Importing Repo into Firebase Studio" src="img/ef5f2ce6f3828b0f.gif"></a></p>
+                <p><strong>What you'll build:</strong></p>
+                <p>
+                    We are building a tool that takes a GitHub username,
+                    accesses their public API data, and uses Google's Gemini
+                    model to "roast" (playfully critique) their coding habits.
+                </p>
 
+                <p>The Architecture:</p>
+                <p>
+                    Input: User provides a GitHub Username. Tool Execution:
+                    Genkit calls a custom tool to fetch repositories and commit
+                    history. LLM Processing: Gemini analyzes the JSON data
+                    against a "Roast Persona". Output: A streamed, witty
+                    response.
+                </p>
 
-      </google-codelab-step>
-    
-      <google-codelab-step label="Get Your Google AI Studio API Key" duration="0">
-        <ol type="1">
-<li>Open <a href="https://aistudio.google.com/" target="_blank">Google AI Studio</a></li>
-<li>Generate an API Key (any project is fine)</li>
-<li>Copy the API key<img alt="Getting API Key from Google AI Studio" src="img/d9ec033246846b62.gif"></li>
-</ol>
+                <p><strong>Prerequisites:</strong></p>
+                <ul>
+                    <li>Basic knowledge of TypeScript/JavaScript</li>
+                    <li>Familiarity with REST APIs</li>
+                    <li>A GitHub account</li>
+                    <li>A Google account for AI Studio access</li>
+                </ul>
+                <p>Duration: 45-60 minutes</p>
+            </google-codelab-step>
 
+            <google-codelab-step
+                label="Import the Project into Firebase Studio"
+                duration="0"
+            >
+                <ol type="1">
+                    <li>
+                        Open
+                        <a href="https://firebase.studio/" target="_blank"
+                            >Firebase Studio</a
+                        >
+                    </li>
+                    <li>Click <strong>Try Firebase Studio</strong></li>
+                    <li>Click <strong>Import Repo</strong></li>
+                    <li>
+                        Paste this repo link:<br /><code
+                            >https://github.com/JesseMurah/dev-fest-tutorial.git</code
+                        >
+                    </li>
+                    <li>Name the workspace <strong>genkit-starter</strong></li>
+                    <li>Click <strong>Import</strong></li>
+                </ol>
+                <p>
+                    <a href="images/firebase_studio.gif" target="_blank"
+                        ><img
+                            alt="Importing Repo into Firebase Studio"
+                            src="images/firebase_studio.gif"
+                    /></a>
+                </p>
+            </google-codelab-step>
 
-      </google-codelab-step>
-    
-      <google-codelab-step label="Add the API Key to Your Project" duration="0">
-        <ol type="1">
-<li>In Firebase Studio, open the <strong>dev.nix</strong> file inside the <strong>.idx</strong> folder.</li>
-<li>Find the <code>env</code> section and add your API key:<pre><code language="language-nix" class="language-nix">env = {
+            <google-codelab-step
+                label="Get Your Google AI Studio API Key"
+                duration="0"
+            >
+                <ol type="1">
+                    <li>
+                        Open
+                        <a href="https://aistudio.google.com/" target="_blank"
+                            >Google AI Studio</a
+                        >
+                    </li>
+                    <li>Generate an API Key (any project is fine)</li>
+                    <li>Copy the API key</li>
+                </ol>
+                <p>
+                    <img
+                        alt="Getting API Key from Google AI Studio"
+                        src="images/ai_studio.gif"
+                    />
+                </p>
+            </google-codelab-step>
+
+            <google-codelab-step
+                label="Add the API Key to Your Project"
+                duration="0"
+            >
+                <ol type="1">
+                    <li>
+                        In Firebase Studio, open the
+                        <strong>dev.nix</strong> file inside the
+                        <strong>.idx</strong> folder.
+                    </li>
+                    <li>
+                        Find the <code>env</code> section and add your API key:
+                        <pre><code language="language-nix" class="language-nix">env = {
   # TODO Get an API key from https://g.co/ai/idxGetGeminiKey
-  GOOGLE_GENAI_API_KEY = &#34;AI STUDIO KEY HERE&#34;;
-};
-</code></pre>
-<img alt="&amp;ldquo;Adding API Key to dev.nix&amp;rdquo;" src="img/e0679524292dc72.jpeg"></li>
-<li>Save the file.Note: Rebuild the environment when prompted (should appear at the bottom right after saving the API key).<img alt="Rebuilding Environment in Firebase Studio" src="img/ed551f057bfa9b93.jpeg"></li>
-</ol>
+  GOOGLE_GENAI_API_KEY = "AI STUDIO KEY HERE";
+};</code></pre>
+                    </li>
+                    <p>
+                        <img
+                            alt="Adding API Key to dev.nix"
+                            src="images/add_gemini_key.jpeg"
+                        />
+                    </p>
+                    <li>Save the file.</li>
+                </ol>
+                <p>
+                    Note: Rebuild the environment when prompted (should appear
+                    at the bottom right after saving the API key).
+                </p>
+                <p>
+                    <img
+                        alt="Rebuilding Environment in Firebase Studio"
+                        src="images/rebuild-environment.jpeg"
+                    />
+                </p>
+            </google-codelab-step>
 
+            <google-codelab-step
+                label="Step 4: Install Dependencies"
+                duration="0"
+            >
+                <p>In the terminal, run:</p>
+                <pre><code language="language-sh" class="language-sh">npm install</code></pre>
+                <p>
+                    <a href="images/npm_install.gif" target="_blank"
+                        ><img
+                            alt="Installing Dependencies"
+                            src="images/npm_install.gif"
+                    /></a>
+                </p>
+            </google-codelab-step>
 
-      </google-codelab-step>
-    
-      <google-codelab-step label="Step 4: Install Dependencies" duration="0">
-        <p>In the terminal, run:</p>
-<pre><code language="language-sh" class="language-sh">npm install
-</code></pre>
-<p><a href="images/npm_install.gif" target="_blank"><img alt="Installing Dependencies" src="img/2d370156ae60da46.gif"></a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Set Up Imports and Initialize Genkit" duration="0">
-        <p>First, let&#39;s examine how we import and initialize Genkit with the Google AI plugin.</p>
-<ol type="1">
-<li>Open the <code>index.ts</code> file in your workspace</li>
-<li>Review the following imports and initialization code:<pre><code language="language-ts" class="language-ts">import { gemini20Flash, googleAI } from &#39;@genkit-ai/googleai&#39;;
-import { genkit, z } from &#39;genkit&#39;;
+            <google-codelab-step
+                label="Set Up Imports and Initialize Genkit"
+                duration="0"
+            >
+                <p>
+                    First, let's examine how we import and initialize Genkit
+                    with the Google AI plugin.
+                </p>
+                <ol type="1">
+                    <li>
+                        Open the <code>index.ts</code> file in your workspace
+                    </li>
+                    <li>
+                        Review the following imports and initialization code:
+                        <pre><code language="language-ts" class="language-ts">import { gemini20Flash, googleAI } from '@genkit-ai/googleai';
+import { genkit, z } from 'genkit';
 
 // Initialize Genkit with the Google AI plugin and set a default model.
 const ai = genkit({
   plugins: [googleAI()],
   model: gemini20Flash,
-});
-</code></pre>
-Note: This setup gives us access to Google&#39;s Gemini models through Genkit&#39;s unified AI interface.</li>
-</ol>
+});</code></pre>
+                        <p>
+                            Note: This setup gives us access to Google's Gemini
+                            models through Genkit's unified AI interface.
+                        </p>
+                    </li>
+                </ol>
+            </google-codelab-step>
 
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Define Data Schemas with Zod" duration="0">
-        <p>Next, we&#39;ll create type-safe data structures using Zod schemas. These ensure our data from the GitHub API is properly validated.</p>
-<ol type="1">
-<li>Add the repository schema for GitHub repository data:<pre><code language="language-ts" class="language-ts">// Zod schema for a GitHub repository&#39;s relevant data.
+            <google-codelab-step
+                label="Define Data Schemas with Zod"
+                duration="0"
+            >
+                <p>
+                    Next, we'll create type-safe data structures using Zod
+                    schemas. These ensure our data from the GitHub API is
+                    properly validated.
+                </p>
+                <ol type="1">
+                    <li>
+                        Add the repository schema for GitHub repository data:
+                        <pre><code language="language-ts" class="language-ts">// Zod schema for a GitHub repository's relevant data.
 const repoSchema = z.object({
   name: z.string(),
   language: z.string().nullable(),
   pushed_at: z.string(),
   stargazers_count: z.number(),
   forks: z.number(),
-});
-</code></pre>
-</li>
-<li>Add the GitHub event schema for commit data:<pre><code language="language-ts" class="language-ts">// Zod schema for a single GitHub event.
+});</code></pre>
+                    </li>
+                    <li>
+                        Add the GitHub event schema for commit data:
+                        <pre><code language="language-ts" class="language-ts">// Zod schema for a single GitHub event.
 const githubEventSchema = z.object({
   id: z.string(),
   type: z.string(),
@@ -166,36 +288,44 @@ const githubEventSchema = z.object({
 });
 
 // Zod schema for an array of GitHub events.
-const githubEventsArraySchema = z.array(githubEventSchema);
-</code></pre>
-Note: Zod schemas provide runtime type validation and excellent TypeScript integration, ensuring data integrity throughout your application.</li>
-</ol>
+const githubEventsArraySchema = z.array(githubEventSchema);</code></pre>
+                        <p>
+                            Note: Zod schemas provide runtime type validation
+                            and excellent TypeScript integration, ensuring data
+                            integrity throughout your application.
+                        </p>
+                    </li>
+                </ol>
+            </google-codelab-step>
 
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Create the GitHub Repositories Tool" duration="0">
-        <p>Now we&#39;ll create our first Genkit tool that fetches GitHub repository data.</p>
-<p>Add the <code>fetchGithubRepos</code> tool:</p>
-<pre><code language="language-ts" class="language-ts">const fetchGithubRepos = ai.defineTool(
+            <google-codelab-step
+                label="Create the GitHub Repositories Tool"
+                duration="0"
+            >
+                <p>
+                    Now we'll create our first Genkit tool that fetches GitHub
+                    repository data.
+                </p>
+                <p>Add the <code>fetchGithubRepos</code> tool:</p>
+                <pre><code language="language-ts" class="language-ts">const fetchGithubRepos = ai.defineTool(
   {
-    name: &#39;fetchGithubRepos&#39;,
+    name: 'fetchGithubRepos',
     description:
-      &#39;Fetches a list of public repositories for a given GitHub username sorted by pushed date (recently updated).&#39;,
+      'Fetches a list of public repositories for a given GitHub username sorted by pushed date (recently updated).',
     // Input validation using Zod
     inputSchema: z.object({ username: z.string() }),
     // Output validation using Zod
     outputSchema: z.array(repoSchema),
   },
-  async ({ username }) =&gt; {
+  async ({ username }) => {
     console.log(`Fetching repos for ${username}`);
     const response = await fetch(
       // Fetch the last 15 repos sorted by pushed date
-      `https://api.github.com/users/${username}/repos?sort=pushed&amp;per_page=15`,
+      `https://api.github.com/users/${username}/repos?sort=pushed&per_page=15`,
       {
         headers: {
-          Accept: &#39;application/vnd.github.v3+json&#39;,
-          &#39;User-Agent&#39;: &#39;Genkit-Repo-Roaster-Agent&#39;, // GitHub requires a User-Agent
+          Accept: 'application/vnd.github.v3+json',
+          'User-Agent': 'Genkit-Repo-Roaster-Agent', // GitHub requires a User-Agent
         },
       },
     );
@@ -208,7 +338,7 @@ Note: Zod schemas provide runtime type validation and excellent TypeScript integ
     const reposParsed = z.array(repoSchema).parse(repos);
 
     // Return only the properties we need
-    return reposParsed.map((repo) =&gt; ({
+    return reposParsed.map((repo) => ({
       name: repo.name,
       language: repo.language,
       pushed_at: repo.pushed_at,
@@ -216,32 +346,40 @@ Note: Zod schemas provide runtime type validation and excellent TypeScript integ
       forks: repo.forks,
     }));
   },
-);
-</code></pre>
-<p>Note: <strong>Important</strong>: Tools are functions that the AI can call autonomously to gather information. The AI decides when and how to use them based on the tool&#39;s description.</p>
+);</code></pre>
+                <p>
+                    Note: <strong>Important</strong>: Tools are functions that
+                    the AI can call autonomously to gather information. The AI
+                    decides when and how to use them based on the tool's
+                    description.
+                </p>
+            </google-codelab-step>
 
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Create the Commit Messages Tool" duration="0">
-        <p>Our second tool will fetch commit messages from a user&#39;s recent GitHub activity.</p>
-<p>Add the <code>fetchCommitMessages</code> tool:</p>
-<pre><code language="language-ts" class="language-ts">const fetchCommitMessages = ai.defineTool(
+            <google-codelab-step
+                label="Create the Commit Messages Tool"
+                duration="0"
+            >
+                <p>
+                    Our second tool will fetch commit messages from a user's
+                    recent GitHub activity.
+                </p>
+                <p>Add the <code>fetchCommitMessages</code> tool:</p>
+                <pre><code language="language-ts" class="language-ts">const fetchCommitMessages = ai.defineTool(
   {
-    name: &#39;fetchCommitMessages&#39;,
-    description: &#39;Fetches commit messages from the last 100 events of a GitHub user.&#39;,
+    name: 'fetchCommitMessages',
+    description: 'Fetches commit messages from the last 100 events of a GitHub user.',
     inputSchema: z.object({
       owner: z.string(),
     }),
     outputSchema: z.array(z.string()),
   },
-  async ({ owner }) =&gt; {
+  async ({ owner }) => {
     const response = await fetch(
       `https://api.github.com/users/${owner}/events?per_page=100`, // Fetch the last 100 events
       {
         headers: {
-          Accept: &#39;application/vnd.github.v3+json&#39;,
-          &#39;User-Agent&#39;: &#39;Genkit-Repo-Roaster-Agent&#39;,
+          Accept: 'application/vnd.github.v3+json',
+          'User-Agent': 'Genkit-Repo-Roaster-Agent',
         },
       },
     );
@@ -256,54 +394,58 @@ Note: Zod schemas provide runtime type validation and excellent TypeScript integ
     return (
       commitsParsed
         // Filter for PushEvent type and extract commit messages
-        .filter((event) =&gt; event.type === &#39;PushEvent&#39;)
-        .map((commit) =&gt; commit.payload.commits?.map((c) =&gt; c.message))
+        .filter((event) => event.type === 'PushEvent')
+        .map((commit) => commit.payload.commits?.map((c) => c.message))
         .flat()
-        .filter((commit) =&gt; commit !== undefined) as string[]
+        .filter((commit) => commit !== undefined) as string[]
     );
   },
-);
-</code></pre>
-<p>Note: This tool extracts commit messages from GitHub&#39;s events API, giving the AI insight into a developer&#39;s commit history.</p>
+);</code></pre>
+                <p>
+                    Note: This tool extracts commit messages from GitHub's
+                    events API, giving the AI insight into a developer's commit
+                    history.
+                </p>
+            </google-codelab-step>
 
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Create the Main Flow" duration="0">
-        <p>Finally, we&#39;ll create the main flow that orchestrates everything together. Add the <code>githubGrillerFlow</code> that combines our tools with AI generation:</p>
-<pre><code language="language-ts" class="language-ts">const githubGrillerFlow = ai.defineFlow(
+            <google-codelab-step label="Create the Main Flow" duration="0">
+                <p>
+                    Finally, we'll create the main flow that orchestrates
+                    everything together. Add the
+                    <code>githubGrillerFlow</code> that combines our tools with
+                    AI generation:
+                </p>
+                <pre><code language="language-ts" class="language-ts">const githubGrillerFlow = ai.defineFlow(
   {
-    name: &#39;githubGrillerFlow&#39;,
+    name: 'githubGrillerFlow',
     inputSchema: z.object({
       username: z.string(),
     }),
     outputSchema: z.string(),
   },
-  async ({ username }, streamCallback) =&gt; {
+  async ({ username }, streamCallback) => {
     const { response, stream } = ai.generateStream({
       prompt: `
-        You are a witty, sarcastic, and expert code reviewer. Your name is &#34;Ripper - The Roast master&#34;.
+        You are a witty, sarcastic, and expert code reviewer. Your name is "Ripper - The Roast master".
         Your task is to write a short, funny roast of a developer based on their public GitHub repositories.
-        Be playful and clever, not truly mean (but also, don&#39;t hold back).
-        
-        Here&#39;s the username for the user &#34;${username}&#34;.
-        
-        Using the provided tools, you will fetch their GitHub repositories and commit messages, 
+        Be playful and clever, not truly mean (but also, don't hold back).
+
+        Here's the username for the user "${username}".
+
+        Using the provided tools, you will fetch their GitHub repositories and commit messages,
         and then roast them based on their activity.
-        
+
         Roast them! Consider these angles:
-        - Too many unfinished projects (look at the &#39;pushed_at&#39; dates).
-        - Sticking to only one language (e.g., &#34;Ah, another JavaScript connoisseur&#34;).
+        - Too many unfinished projects (look at the 'pushed_at' dates).
+        - Sticking to only one language (e.g., "Ah, another JavaScript connoisseur").
         - Weird or unoriginal repository names.
         - A graveyard of forked repos with no original work.
         - A complete lack of stars.
-        
+
         You only have one task: roast the developer based on their GitHub activity and nothing else.
         Return the roast as a single string, no other text or explanation needed.
       `,
-      /* 
-
-        Please note the tools being used here are crucial for fetching the necessary data to inform the AI&#39;s response.
+      /* Please note the tools being used here are crucial for fetching the necessary data to inform the AI's response.
 
       */
       tools: [fetchGithubRepos, fetchCommitMessages],
@@ -321,98 +463,202 @@ Note: Zod schemas provide runtime type validation and excellent TypeScript integ
     console.log({ text });
     return text;
   },
-);
-</code></pre>
-<p>Note: <strong>Flow Architecture</strong>: Flows orchestrate multiple AI calls and tool usage. They can stream responses in real-time and handle complex multi-step AI interactions.</p>
+);</code></pre>
+                <p>
+                    Note: <strong>Flow Architecture</strong>: Flows orchestrate
+                    multiple AI calls and tool usage. They can stream responses
+                    in real-time and handle complex multi-step AI interactions.
+                </p>
+            </google-codelab-step>
 
+            <google-codelab-step label="Run and Test the Project" duration="0">
+                <p>
+                    Now let's run the Genkit Developer UI to test our GitHub
+                    Roaster application.
+                </p>
+                <ol type="1">
+                    <li>
+                        In the terminal, first check if the Genkit Development
+                        UI is running.
+                        <p>
+                            <a href="images/run-gdu.gif" target="_blank"
+                                ><img
+                                    alt="Run Genkit Development UI"
+                                    src="images/run-gdu.gif"
+                            /></a>
+                        </p>
+                    </li>
+                    <li>
+                        If not, start the Genkit Development UI by running the
+                        following command:
+                        <pre><code language="language-sh" class="language-sh">npx genkit start -- npx tsx --watch index.ts</code></pre>
+                    </li>
+                    <li>
+                        Click on the link provided in the terminal (usually
+                        <code>http://localhost:4000</code>), which opens the
+                        Genkit Developer UI in your browser.
+                        <p>
+                            <em
+                                >Do not type the URL manually, as this won't
+                                work, since the server is running on Firebase
+                                Studio's infrastructure, not your local
+                                machine.</em
+                            >
+                        </p>
+                    </li>
+                    <li>
+                        In the Genkit Developer UI:
+                        <ul>
+                            <li>
+                                Navigate to the <strong>Flows</strong> section
+                            </li>
+                            <li>Find the <code>githubGrillerFlow</code></li>
+                            <li>Click on it to open the flow tester</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Test the flow:
+                        <ul>
+                            <li>Enter a GitHub username in the input field</li>
+                            <li>Click <strong>Run Flow</strong></li>
+                            <li>
+                                Watch as the AI streams its roast in real-time!
+                            </li>
+                        </ul>
+                        <p>
+                            <a
+                                href="images/genkit-development-ui.gif"
+                                target="_blank"
+                                ><img
+                                    alt="Genkit Development UI"
+                                    src="images/genkit-development-ui.gif"
+                            /></a>
+                        </p>
+                    </li>
+                    <li>
+                        Explore the <strong>Tools</strong> section to see how
+                        individual tools work:
+                        <ul>
+                            <li>
+                                Test <code>fetchGithubRepos</code> with
+                                different usernames
+                            </li>
+                            <li>
+                                Try <code>fetchCommitMessages</code> to see
+                                commit history analysis
+                            </li>
+                        </ul>
+                    </li>
+                </ol>
+                <p>
+                    Note: <strong>Developer UI Features</strong>: The Genkit
+                    Developer UI provides powerful debugging capabilities,
+                    allowing you to test flows, inspect tool outputs, and
+                    monitor AI interactions in real-time.
+                </p>
+                <p>
+                    Note: <strong>Rate Limiting</strong>: Be mindful of GitHub's
+                    API rate limits when testing. Unauthenticated requests are
+                    limited to 60 per hour per IP address.
+                </p>
+            </google-codelab-step>
 
-      </google-codelab-step>
-    
-      <google-codelab-step label="Run and Test the Project" duration="0">
-        <p>Now let&#39;s run the Genkit Developer UI to test our GitHub Roaster application.</p>
-<ol type="1">
-<li>In the terminal, first check if the Genkit Development UI is running.<a href="images/run-gdu.gif" target="_blank"><img alt="Run Genkit Development UI" src="img/1d7815ae84be301f.gif"></a></li>
-<li>If not, start the Genkit Development UI by running the following command:<pre><code language="language-sh" class="language-sh">npx genkit start -- npx tsx --watch index.ts
-</code></pre>
-</li>
-<li>Click on the link provided in the terminal (usually <code>http://localhost:4000</code>), which opens the Genkit Developer UI in your browser.<em>Do not type the URL manually, as this won&#39;t work, since the server is running on Firebase Studio&#39;s infrastructure, not your local machine.</em></li>
-<li>In the Genkit Developer UI:<ul>
-<li>Navigate to the <strong>Flows</strong> section</li>
-<li>Find the <code>githubGrillerFlow</code></li>
-<li>Click on it to open the flow tester</li>
-</ul>
-</li>
-<li>Test the flow:<ul>
-<li>Enter a GitHub username in the input field (try your own or <code>octocat</code>)</li>
-<li>Click <strong>Run Flow</strong></li>
-<li>Watch as the AI streams its roast in real-time!</li>
-</ul>
-<a href="images/genkit-development-ui.gif" target="_blank"><img alt="Genkit Development UI" src="img/4329fcae7d8debe2.gif"></a></li>
-<li>Explore the <strong>Tools</strong> section to see how individual tools work:<ul>
-<li>Test <code>fetchGithubRepos</code> with different usernames</li>
-<li>Try <code>fetchCommitMessages</code> to see commit history analysis</li>
-</ul>
-</li>
-</ol>
-<p>Note: <strong>Developer UI Features</strong>: The Genkit Developer UI provides powerful debugging capabilities, allowing you to test flows, inspect tool outputs, and monitor AI interactions in real-time.</p>
-<p>Note: <strong>Rate Limiting</strong>: Be mindful of GitHub&#39;s API rate limits when testing. Unauthenticated requests are limited to 60 per hour per IP address.</p>
+            <google-codelab-step label="Congratulations!" duration="0">
+                <p>
+                    You've successfully built an AI-powered GitHub analysis
+                    application using Firebase Genkit!
+                </p>
+                <p><strong>What you accomplished:</strong></p>
+                <ul>
+                    <li>✅ Set up Genkit with Google AI integration</li>
+                    <li>✅ Created type-safe data schemas with Zod</li>
+                    <li>
+                        ✅ Built custom AI tools for external API integration
+                    </li>
+                    <li>✅ Implemented a streaming AI flow</li>
+                    <li>
+                        ✅ Tested your application with the Genkit Developer UI
+                    </li>
+                </ul>
+                <p><strong>Next Steps:</strong></p>
+                <ul>
+                    <li>
+                        Try modifying the roast prompt for different
+                        personalities
+                    </li>
+                    <li>
+                        Add more GitHub API endpoints like Github Profile Info,
+                        so it can use the user's name and bio in the roast
+                    </li>
+                    <li>
+                        Add more GitHub API endpoints (issues, pull requests,
+                        etc.)
+                    </li>
+                    <li>Deploy your application to Firebase Functions</li>
+                    <li>Explore other Genkit plugins and models</li>
+                </ul>
+            </google-codelab-step>
 
+            <google-codelab-step
+                label="Resources and Connect With Us"
+                duration="0"
+            >
+                <h2 is-upgraded>📚 Workshop Resources</h2>
+                <ul>
+                    <li>
+                        <strong>GitHub Repository</strong>:
+                        <a
+                            href="https://github.com/JesseMurah/dev-fest-tutorial"
+                            target="_blank"
+                            >dev-fest-tutorial</a
+                        >
+                    </li>
+                    <li>
+                        <strong>Firebase Genkit Documentation</strong>:
+                        <a
+                            href="https://firebase.google.com/docs/genkit"
+                            target="_blank"
+                            >Official Docs</a
+                        >
+                    </li>
+                    <li>
+                        <strong>Google AI Studio</strong>:
+                        <a href="https://aistudio.google.com/" target="_blank"
+                            >aistudio.google.com</a
+                        >
+                    </li>
+                </ul>
 
-      </google-codelab-step>
-    
-      <google-codelab-step label="Congratulations!" duration="0">
-        <p>You&#39;ve successfully built an AI-powered GitHub analysis application using Firebase Genkit!</p>
-<p><strong>What you accomplished:</strong></p>
-<ul>
-<li>✅ Set up Genkit with Google AI integration</li>
-<li>✅ Created type-safe data schemas with Zod</li>
-<li>✅ Built custom AI tools for external API integration</li>
-<li>✅ Implemented a streaming AI flow</li>
-<li>✅ Tested your application with the Genkit Developer UI</li>
-</ul>
-<p><strong>Next Steps:</strong></p>
-<ul>
-<li>Try modifying the roast prompt for different personalities</li>
-<li>Add more GitHub API endpoints like Github Profile Info, so it can use the user&#39;s name and bio in the roast</li>
-<li>Add more GitHub API endpoints (issues, pull requests, etc.)</li>
-<li>Deploy your application to Firebase Functions</li>
-<li>Explore other Genkit plugins and models</li>
-</ul>
+                <h2 is-upgraded>🤝 Connect With the Authors</h2>
+                <p><strong>Jesse Murah</strong></p>
+                <ul>
+                    <li>
+                        💼 LinkedIn:
+                        <a
+                            href="https://linkedin.com/in/JesseMurah"
+                            target="_blank"
+                            >Jesse Murah</a
+                        >
+                    </li>
+                    <li>
+                        🐙 GitHub:
+                        <a href="https://github.com/JesseMurah" target="_blank"
+                            >@JesseMurah</a
+                        >
+                    </li>
+                </ul>
 
+                <hr />
 
-      </google-codelab-step>
-    
-      <google-codelab-step label="Resources and Connect With Us" duration="0">
-        <h2 is-upgraded>📚 Workshop Resources</h2>
-<ul>
-<li><strong>GitHub Repository</strong>: <a href="https://github.com/unstacked-labs/genkit-rshow-starter" target="_blank">genkit-rshow-starter</a></li>
-<li><strong>Firebase Genkit Documentation</strong>: <a href="https://firebase.google.com/docs/genkit" target="_blank">Official Docs</a></li>
-<li><strong>Google AI Studio</strong>: <a href="https://aistudio.google.com/" target="_blank">aistudio.google.com</a></li>
-</ul>
-<h2 is-upgraded>🤝 Connect With the Authors</h2>
-<p><strong>Maina Wycliffe</strong></p>
-<ul>
-<li>💼 LinkedIn: <a href="https://linkedin.com/in/mainawycliffe" target="_blank">Maina Wycliffe</a></li>
-<li>🐙 GitHub: <a href="https://github.com/mainawycliffe" target="_blank">@mainawycliffe</a></li>
-</ul>
-<p><strong>Wayne Gakuo</strong></p>
-<ul>
-<li>🐦 Twitter: <a href="https://x.com/wayne_gakuo" target="_blank">@wayne_gakuo</a></li>
-<li>💼 LinkedIn: <a href="https://www.linkedin.com/in/waynegakuo/" target="_blank">Wayne Gakuo</a></li>
-<li>🐙 GitHub: <a href="https://github.com/waynegakuo" target="_blank">@waynegakuo</a></li>
-</ul>
-<p>Happy coding! 🚀</p>
+                <p><strong>Credit to Unstacked Labs.</strong></p>
+                <p>Have Fun! 🚀</p>
+            </google-codelab-step>
+        </google-codelab>
 
-
-      </google-codelab-step>
-    
-  </google-codelab>
-
-  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
-  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
-  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
-  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
-  <script src="//support.google.com/inapp/api.js"></script>
-
-</body>
+        <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+        <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+        <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+        <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+        <script src="//support.google.com/inapp/api.js"></script>
+    </body>
 </html>

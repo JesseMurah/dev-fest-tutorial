@@ -6,21 +6,12 @@
   "updated": "2025-09-05T10:06:45+02:00",
   "id": "docs",
   "duration": 0,
-  "title": "Google AI Roadshow - Genkit Hands-on Workshop",
+  "title": "Google DevFest Tamale - Genkit Hands-on Workshop",
   "summary": "Learn how to build AI applications with Genkit",
   "source": "instructions.md",
   "theme": "",
-  "status": [
-    "published"
-  ],
-  "category": [
-    "ai",
-    "firebase",
-    "genkit"
-  ],
-  "tags": [
-    "web"
-  ],
-  "feedback": "https://github.com/unstacked-labs/genkit-rshow-starter/issues",
+  "status": ["published"],
+  "category": ["ai", "firebase", "genkit"],
+  "tags": ["web"],
   "url": "docs"
 }
