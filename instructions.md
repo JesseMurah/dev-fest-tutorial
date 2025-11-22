@@ -1,36 +1,30 @@
-author: Maina Wycliffe, Wayne Gakuo
-summary: Learn how to build AI applications with Genkit
-id: docs
-categories: ai,firebase,genkit
-environments: Web
-status: Published
-source: https://unstacked.dev
-feedback link: https://github.com/unstacked-labs/genkit-rshow-starter/issues
+author: Jesse Murah
 
-# Google AI Roadshow - Genkit Hands-on Workshop
+
 
 ## Overview
 
-In this hands-on codelab, you'll learn how to build AI-powered applications using **Firebase Genkit**. We'll create a fun "GitHub Roaster" application that uses AI to analyze a developer's GitHub profile and generate witty commentary about their coding habits.
+Welcome to the Workshop! In this hands-on codelab, we are moving beyond simple chatbots. You will learn how to build production-ready AI applications using **Firebase Genkit**. We will build a "GitHub Roaster"—an application that doesn't just "chat," but actively fetches data, analyzes code patterns, and generates witty, context-aware commentary.
 
-_This workshop is brought to you by [Unstacked Labs](https://unstacked.dev) - empowering developers across Africa with cutting-edge technology._
 
 **What you'll learn:**
 
-- How to set up and configure Genkit with Google AI
-- Creating type-safe data schemas with Zod
-- Building AI tools that can fetch external data
-- Implementing AI flows that orchestrate multiple operations
-- Using Genkit's streaming capabilities for real-time responses
+- Initialize Genkit: Configure the framework with Google AI (Gemini).
+- Enforce Type Safety: Use Zod schemas to ensure your AI's inputs and outputs are structured and predictable.
+- Bridge the Gap: Build custom Tools that allow the AI to fetch real-time data from the GitHub API.
+- Orchestrate Flows: Chain multiple operations (fetching  →  analyzing  →  generating) into a cohesive logic flow.
+- Stream Results: Implement real-time text streaming for a snappy user experience.
 
 **What you'll build:**
 
-A GitHub profile analyzer that:
+We are building a tool that takes a GitHub username, accesses their public API data, and uses Google's Gemini model to "roast" (playfully critique) their coding habits.
 
-- Fetches repository data from the GitHub API
-- Analyzes commit patterns and project activity
-- Generates entertaining roasts using Google's Gemini AI
-- Streams responses in real-time
+The Architecture:
+
+Input: User provides a GitHub Username.
+Tool Execution: Genkit calls a custom tool to fetch repositories and commit history.
+LLM Processing: Gemini analyzes the JSON data against a "Roast Persona"
+Output: A streamed, witty response.
 
 **Prerequisites:**
 
@@ -49,7 +43,7 @@ Duration: 45-60 minutes
 2. Click **Try Firebase Studio**
 3. Click **Import Repo**
 4. Paste this repo link:  
-   `https://github.com/unstacked-labs/genkit-rshow-starter`
+   `https://github.com/JesseMurah/dev-fest-tutorial.git`
 5. Name the workspace **genkit-starter**
 6. Click **Import**
 
@@ -371,7 +365,7 @@ Now let's run the Genkit Developer UI to test our GitHub Roaster application.
 
 5. Test the flow:
 
-   - Enter a GitHub username in the input field (try your own or `octocat`)
+   - Enter a GitHub username in the input field
    - Click **Run Flow**
    - Watch as the AI streams its roast in real-time!
 
@@ -419,17 +413,12 @@ You've successfully built an AI-powered GitHub analysis application using Fireba
 
 ### 🤝 Connect With the Authors
 
-**Maina Wycliffe**
+**Jesse Murah**
 
-- 💼 LinkedIn: [Maina Wycliffe](https://linkedin.com/in/mainawycliffe)
-- 🐙 GitHub: [@mainawycliffe](https://github.com/mainawycliffe)
+- 💼 LinkedIn: [Jesse Murah](https://linkedin.com/in/JesseMurah)
+- 🐙 GitHub: [@JesseMurah](https://github.com/JesseMurah)
 
-**Wayne Gakuo**
-
-- 🐦 Twitter: [@wayne_gakuo](https://x.com/wayne_gakuo)
-- 💼 LinkedIn: [Wayne Gakuo](https://www.linkedin.com/in/waynegakuo/)
-- 🐙 GitHub: [@waynegakuo](https://github.com/waynegakuo)
 
 ---
 
-Happy coding! 🚀
+Have Fun! 🚀
