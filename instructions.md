@@ -47,7 +47,7 @@ Duration: 45-60 minutes
 5. Name the workspace **genkit-starter**
 6. Click **Import**
 
-[![Importing Repo into Firebase Studio](images/firebase_studio.gif)](images/firebase_studio.gif)
+<!-- [![Importing Repo into Firebase Studio](images/firebase_studio.gif)](images/firebase_studio.gif) -->
 
 ---
 
@@ -57,7 +57,7 @@ Duration: 45-60 minutes
 2. Generate an API Key (any project is fine)
 3. Copy the API key
 
-   ![Getting API Key from Google AI Studio](images/ai_studio.gif)
+   <!-- ![Getting API Key from Google AI Studio](images/ai_studio.gif) -->
 
 ---
 
@@ -73,13 +73,13 @@ Duration: 45-60 minutes
    };
    ```
 
-   !["Adding API Key to dev.nix"](images/add_gemini_key.jpeg)
+   <!-- !["Adding API Key to dev.nix"](images/add_gemini_key.jpeg) -->
 
 3. Save the file.
 
    Note: Rebuild the environment when prompted (should appear at the bottom right after saving the API key).
 
-   ![Rebuilding Environment in Firebase Studio](images/rebuild-environment.jpeg)
+   <!-- ![Rebuilding Environment in Firebase Studio](images/rebuild-environment.jpeg) -->
 
 ---
 
@@ -91,7 +91,7 @@ In the terminal, run:
 npm install
 ```
 
-[![Installing Dependencies](images/npm_install.gif)](images/npm_install.gif)
+<!-- [![Installing Dependencies](images/npm_install.gif)](images/npm_install.gif) -->
 
 ---
 
@@ -343,7 +343,7 @@ Now let's run the Genkit Developer UI to test our GitHub Roaster application.
 
 1. In the terminal, first check if the Genkit Development UI is running.
 
-   [![Run Genkit Development UI](images/run-gdu.gif)](images/run-gdu.gif)
+   <!-- [![Run Genkit Development UI](images/run-gdu.gif)](images/run-gdu.gif) -->
 
 2. If not, start the Genkit Development UI by running the following command:
 
@@ -369,7 +369,7 @@ Now let's run the Genkit Developer UI to test our GitHub Roaster application.
    - Click **Run Flow**
    - Watch as the AI streams its roast in real-time!
 
-   [![Genkit Development UI](images/genkit-development-ui.gif)](images/genkit-development-ui.gif)
+   <!-- [![Genkit Development UI](images/genkit-development-ui.gif)](images/genkit-development-ui.gif) -->
 
 6. Explore the **Tools** section to see how individual tools work:
    - Test `fetchGithubRepos` with different usernames
@@ -407,7 +407,7 @@ You've successfully built an AI-powered GitHub analysis application using Fireba
 
 ### 📚 Workshop Resources
 
-- **GitHub Repository**: [genkit-rshow-starter](https://github.com/unstacked-labs/genkit-rshow-starter)
+- **GitHub Repository**: [dev-fest-tutorial](https://github.com/unstacked-labs/genkit-rshow-starter)
 - **Firebase Genkit Documentation**: [Official Docs](https://firebase.google.com/docs/genkit)
 - **Google AI Studio**: [aistudio.google.com](https://aistudio.google.com/)
 
@@ -420,5 +420,7 @@ You've successfully built an AI-powered GitHub analysis application using Fireba
 
 
 ---
+
+**Credit to Unstacked Labs.**
 
 Have Fun! 🚀
